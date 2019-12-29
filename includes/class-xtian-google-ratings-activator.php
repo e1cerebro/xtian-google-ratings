@@ -30,6 +30,12 @@ class Xtian_Google_Ratings_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+	 
+		update_option('xtain_gr_enable_el', '1');
+
+		update_option('xtain_gr_show_leave_review_el', '1');
+		
+		update_option('xtain_gr_rating_positioning_el', 'left');
 
 	}
 

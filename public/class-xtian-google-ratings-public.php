@@ -73,7 +73,7 @@ class Xtian_Google_Ratings_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xtian-google-ratings-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/xtian-google-ratings-public.css#asyncload', array(), $this->version, 'all' );
 
 	}
 
@@ -96,57 +96,25 @@ class Xtian_Google_Ratings_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xtian-google-ratings-public.js', array( 'jquery' ), $this->version, false );
+		//wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/xtian-google-ratings-public.js#asyncload', array( 'jquery' ), $this->version, false );
 
 	}
 
 	public function xtian_gr_rating_html() {
 
-		$gr_rating = trim(get_option('xtian_gr_rating'));
-
-		if( '1' == get_option('xtain_gr_enable_el') && ( strlen(get_option('xtain_gr_company_name_key_el')) > 0 && strlen(get_option('	xtain_gr_google_api_key_el')) > 0 ) ):
-		 ?> 
-
-			<!-- Start Mobile -->
-			<div class="gr-mobile-container">
-					<div class="gr-left">
-					<img class="gr-google-logo" src="<?php echo LOADING_IMAGE_PATH; ?>" alt="Google Logo">
-						<span class="gr_rating"> <?php echo  number_format($gr_rating , 1); ?> </span> <div class="Stars" style="--rating: <?php echo get_option( 'xtian_gr_rating'); ?>;" aria-label="Rating of this product is <?php echo get_option( 'xtian_gr_rating'); ?> out of 5."></div>
-					</div>
-					<div class="gr-right">
-						<?php if('1' == get_option( 'xtain_gr_show_leave_review_el' )): ?>
-							<span class="gr-leave-review"><a target="_blank" href="https://search.google.com/local/writereview?placeid=<?php echo get_option('xtian_gr_reference_id'); ?>">&#9998; Leave A Review</a></span>
-						<?php endif; ?>
-					</div>
-			</div>
-			<!-- End Mobile -->
-
- 			<div class="gr-container">
-				<div class="gr-header">
-					<?php if('1' == get_option( 'xtain_gr_show_leave_review_el' )): ?>
-						<span class="gr-leave-review"><a target="_blank" href="https://search.google.com/local/writereview?placeid=<?php echo get_option('xtian_gr_reference_id'); ?>">&#9998; Leave A Review</a></span>
-					<?php endif; ?>
-				</div>
-				<div class="gr-body">
-					<div class="gr-left">
-						<img class="gr-google-logo" src="<?php echo LOADING_IMAGE_PATH; ?>" alt="Google Logo">
-					</div>
-					<div class="gr-right">
-						<div class="gr-right__top">
-							<span class="gr-title">Google Rating</span>
-						</div>
-						<div class="gr-right__main">
-							<span class="gr_rating"> <?php echo  number_format($gr_rating , 1); ?> </span> <div class="Stars" style="--rating: <?php echo get_option( 'xtian_gr_rating'); ?>;" aria-label="Rating of this product is <?php echo get_option( 'xtian_gr_rating'); ?> out of 5.">
-							
-							<?php if('1' == get_option( 'xtain_gr_show_leave_review_el' )): ?>
-								<!-- <span class="gr-leave-review"> / <a href="https://search.google.com/local/writereview?placeid=ChIJzc7sFGsUVBMR87i2puYDn-U">Leave A Review</a></span> -->
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		  <?php
-		  endif;
+		include_once( 'partials/xtian-google-ratings-public-display.php' );
 	 }
+
+	 // Async load
+	function xtian_gr_async_scripts($url)
+	{
+		if ( strpos( $url, '#asyncload') === false )
+			return $url;
+		else if ( is_admin() )
+			return str_replace( '#asyncload', '', $url );
+		else
+			return str_replace( '#asyncload', '', $url )."' async='async"; 
+	}
+	
 
 }

@@ -160,6 +160,12 @@ class Xtian_Google_Ratings {
 		
 		/* Adding Settings */
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'xtian_gr_settings_options' );
+
+		//cron job
+		
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'xtian_gr_cron_exec' );
+		$this->loader->add_action( 'xtian_gr_cron_exec', $plugin_admin, 'xtian_gr_cron_cb' );
+		$this->loader->add_filter( 'cron_schedules', $plugin_admin, 'chmg_wapu_custom_cron_schedules' );
 	}
 
 	/**
@@ -176,6 +182,7 @@ class Xtian_Google_Ratings {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'xtian_gr_rating_html' );
+		$this->loader->add_filter( 'clean_url', $plugin_public,'xtian_gr_async_scripts', 11, 1 );
  
 	}
 

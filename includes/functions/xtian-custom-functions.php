@@ -2,7 +2,7 @@
 
     class GR_Helpers {
 
-        public static function update_ratings(){
+        private static function update_ratings(){
             $buz_google_api 	= trim(get_option( 'xtain_gr_google_api_key_el'));
             $companyName 		= urlencode(get_option('xtain_gr_company_name_key_el'));
         
@@ -12,6 +12,16 @@
             $rating   			= $data->results[0]->rating;
             
             return array($rating, $referenceID );
+        }
+
+        public static function update_company(){
+                $gr_google_data = self::update_ratings();
+               
+                if(!empty($gr_google_data[0]) && !empty($gr_google_data[1])){
+                    update_option( 'xtian_gr_rating', $gr_google_data[0], true );
+                    update_option( 'xtian_gr_reference_id', $gr_google_data[1], true );
+                }
+                
         }
 
     }

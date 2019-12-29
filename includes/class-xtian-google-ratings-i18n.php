@@ -42,6 +42,4 @@ class Xtian_Google_Ratings_i18n {
 
 	}
 
-
-
 }

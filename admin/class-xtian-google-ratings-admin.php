@@ -112,38 +112,66 @@ class Xtian_Google_Ratings_Admin {
 	}
 
 	public function xtian_gr_settings_page(){
-
 		include_once( 'partials/xtian-google-ratings-admin-display.php' );
-
-		// $buz_google_api 	= trim('AIzaSyB-XJtNX1nMaAjqywx_q8VDHFQEw3D5alQ');
-		// $companyName 		= urlencode('Scooter Country');
-	
-		// $referenceObj 		= wp_remote_get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='.$companyName.'&sensor=true&key='.$buz_google_api);
-		// $data 				= json_decode($referenceObj['body']);
-		// $referenceID   		= $data->results[0]->reference;
-		// $rating   			= $data->results[0]->rating;
 		
-		// return array($rating, $referenceID );
-		// $ratings 			= $reviewsOBJ->result->rating;
-
-		// echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
 	}
 
 	public function xtian_gr_settings_options(){
 		/* ---------------------- GENERAL SECTION ---------------------- */
 			include_once( 'partials/settings-api/xtian-general-settings.php' );
 			$general_settings = new GR_General_Settings($this->plugin_name);
-			$general_settings->register_section();
-			$general_settings->register_fields();
 		/* ---------------------- END GENERAL SECTION ---------------------- */
 		
 		/* ---------------------- DISPLAY SECTION ---------------------- */
 			include_once( 'partials/settings-api/xtian-display-settings.php' );
 			$display_settings = new GR_Display_Settings($this->plugin_name);
-			$display_settings->register_section();
-			$display_settings->register_fields();
 		/* ---------------------- END DISPLAY SECTION ---------------------- */
+
+		//Add instances into an array
+		$object = array($general_settings, $display_settings);
+
+		//Dynamically create the sections and fields
+		foreach ($object as $instance) {
+			$instance->register_section();
+			$instance->register_fields();
+		}
 	}
+
+	// Cron Job
+	public function xtian_gr_cron_exec(){
+		if ( !wp_next_scheduled( 'xtian_gr_cron_exec' ) ) {
+			wp_schedule_event( time(), '1min', 'xtian_gr_cron_exec' );
+		}
+	}
+
+	public function xtian_gr_cron_cb(){
+		include_once(GR_UTIL_FUNCTIONS);
+		GR_Helpers::update_company();
+	}
+
+	public function chmg_wapu_custom_cron_schedules($schedules){
+		if(!isset($schedules["1min"])){
+			$schedules["1min"] = array(
+				'interval' => 1*60,
+				'display' => __('Once every minute'));
+		}
+		if(!isset($schedules["3min"])){
+			$schedules["3min"] = array(
+				'interval' => 3*60,
+				'display' => __('Once every 3 minutes'));
+		}
+		if(!isset($schedules["5min"])){
+			$schedules["5min"] = array(
+				'interval' => 5*60,
+				'display' => __('Once every 5 minutes'));
+		}
+		if(!isset($schedules["30min"])){
+			$schedules["30min"] = array(
+				'interval' => 30*60,
+				'display' => __('Once every 30 minutes'));
+		}
+		return $schedules;
+	}
+
+	
 }

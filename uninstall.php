@@ -29,3 +29,18 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+	if(!empty(get_option('xtain_gr_enable_el')))
+		delete_option('xtain_gr_enable_el');
+
+	if(!empty(get_option('xtain_gr_show_leave_review_el')))
+		delete_option('xtain_gr_show_leave_review_el');
+	
+	if(!empty(get_option('xtain_gr_rating_positioning_el')))
+		delete_option('xtain_gr_rating_positioning_el');
+	
+	if(!empty(get_option('xtain_gr_google_api_key_el')))
+		delete_option('xtain_gr_google_api_key_el');	
+	
+	if(!empty(get_option('xtain_gr_company_name_key_el')))
+		delete_option('xtain_gr_company_name_key_el');

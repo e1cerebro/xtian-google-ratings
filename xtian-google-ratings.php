@@ -13,9 +13,9 @@
  * @package           Xtian_Google_Ratings
  *
  * @wordpress-plugin
- * Plugin Name:       Google Ratings
+ * Plugin Name:       Google Ratings Bar
  * Plugin URI:        https://github.com/e1cerebro/xtian-google-ratings
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This displays the google Rating bar at the bottom or right hand side of your website
  * Version:           1.0.0
  * Author:            Christian Uche
  * Author URI:        #
@@ -38,7 +38,7 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'XTIAN_GOOGLE_RATINGS_VERSION', '1.0.0' );
 define( 'GR_TEXT_DOMAIN', 'xtian-google-ratings' );
 define( 'LOADING_IMAGE_PATH', plugin_dir_url( __FILE__ ).'includes/img/google-logo.png'  );
-define( 'GR_CUSTOM_FUNCTIONS', plugin_dir_url( __FILE__ ).'includes/functions/xtian-custom-functions.php');
+define( 'GR_UTIL_FUNCTIONS', plugin_dir_path( __FILE__ ).'includes/functions/xtian-custom-functions.php');
 
 /**
  * The code that runs during plugin activation.

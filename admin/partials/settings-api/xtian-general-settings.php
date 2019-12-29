@@ -41,7 +41,7 @@ class GR_General_Settings{
 	public function xtain_gr_google_api_key_cb(){
 		$xtain_gr_google_api_key_el =  get_option('xtain_gr_google_api_key_el');
 		?>
-			<input name="xtain_gr_google_api_key_el" type="text" id="xtain_gr_google_api_key_el" value="<?php echo $xtain_gr_google_api_key_el; ?>" class="regular-text">
+			<input name="xtain_gr_google_api_key_el" type="text" id="xtain_gr_google_api_key_el" required value="<?php echo $xtain_gr_google_api_key_el; ?>" class="regular-text">
 			<p class="description"><?php _e('Enter a valid google API key in the box above', GR_TEXT_DOMAIN) ?></p>
 		<?php
     } 
@@ -49,9 +49,16 @@ class GR_General_Settings{
 	public function xtain_gr_company_name_key_cb(){
 		$xtain_gr_company_name_key_el =  get_option('xtain_gr_company_name_key_el');
 		?>
-			<input name="xtain_gr_company_name_key_el" type="text" id="xtain_gr_company_name_key_el" value="<?php echo $xtain_gr_company_name_key_el; ?>" class="regular-text">
+			<input name="xtain_gr_company_name_key_el" type="text" id="xtain_gr_company_name_key_el" required value="<?php echo $xtain_gr_company_name_key_el; ?>" class="regular-text">
 			<p class="description"><?php _e('Enter the company name just as it appears on google registeration', GR_TEXT_DOMAIN) ?></p>
 		<?php
-	}
+    }
+    
+
+    public function xtian_gr_sanitize_callback($input){
+
+        return $input;
+
+    }
 }
 
