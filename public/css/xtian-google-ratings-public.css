@@ -1,4 +1,164 @@
-/**
+    /**
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+    
+     :root {
+        --star-size: 30px;
+        --star-color: #909090;
+        --star-background: #e77119;
+    }
+    
+    .Stars {
+        --percent: calc(var(--rating) / 5 * 100%);
+        display: inline-block;
+        font-size: var(--star-size);
+        font-family: Times;
+        line-height: 1;
+    }
+    
+    .Stars::before {
+        content: '★★★★★';
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    /* Extra small devices (phones, 600px and down) */
+    
+    @media only screen and (max-width: 600px) {
+        .gr-container {
+            display: none;
+        }
+        .gr-mobile-container {
+            display: flex;
+            box-shadow: 1px 0px 4px 0px #969696;
+            background-color: #fff;
+            z-index: 1000;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            width: 343px;
+            padding-left: 11px;
+            margin-top: 150px;
+            transform: rotate(270deg);
+            transform-origin: 0% 0%;
+            -ms-transform: rotate(270deg);
+            -ms-transform-origin: 0% 0%;
+            -webkit-transform: rotate(270deg);
+            -webkit-transform-origin: 0% 0%;
+            flex-direction: row;
+            font-family: sans-serif;
+        }
+        span.gr-leave-review {
+            float: right;
+            cursor: pointer;
+            background: #31a952;
+            color: #fff;
+            width: auto;
+            padding: 0 10px;
+            text-align: center;
+            transition: 0.35s all;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        span.gr-leave-review a {
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        span.gr-leave-review:hover {
+            background: #e77119;
+            color: #fff;
+            text-align: center;
+        }
+        img.gr-google-logo {
+            width: 17px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .gr-right {
+            margin: auto 0;
+        }
+        span.gr_rating {
+            font-size: 18px;
+            color: #e77119;
+            font-weight: 600;
+            margin-right: 3px;
+        }
+        .Stars {
+            --percent: calc(var(--rating) / 5 * 100%);
+            display: inline-block;
+            font-size: 23px;
+            font-family: Times;
+            line-height: 1;
+        }
+    }
+    
+    @media only screen and (min-width: 600px) {
+        .gr-mobile-container {
+            display: none;
+        }
+        .gr-container {
+            display: flex;
+            flex-direction: column;
+            padding: 5px 5px;
+            width: auto;
+            position: fixed;
+            left: 3px;
+            bottom: 0px;
+            z-index: 1000;
+            font-family: sans-serif;
+        }
+        .gr-body {
+            display: flex;
+            background-color: #fff;
+            box-shadow: 1px 0px 4px 0px #969696;
+            padding: 8px 8px;
+        }
+        span.gr-leave-review {
+            float: right;
+            cursor: pointer;
+            background: #31a952;
+            color: #fff;
+            width: auto;
+            padding: 0 10px;
+            text-align: center;
+            box-shadow: 1px 0px 4px 0px #969696;
+            transition: 0.35s all;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 4px 8px;
+        }
+        span.gr-leave-review a {
+            color: #fff;
+            text-decoration: none;
+        }
+        span.gr-leave-review:hover {
+            background: #e77119;
+            color: #fff;
+            text-align: center;
+        }
+        img.gr-google-logo {
+            width: 43px;
+        }
+        .gr-left {
+            margin: auto 0;
+        }
+        .gr-right {
+            margin-left: 9px;
+        }
+        span.gr-title {
+            font-size: 20px;
+            color: #6d6d6d;
+            font-family: sans-serif;
+        }
+        span.gr_rating {
+            font-size: 23px;
+            color: #e77119;
+            font-weight: bold;
+        }
+        .gr-right__main {
+            margin-top: -3px;
+        }
+    }

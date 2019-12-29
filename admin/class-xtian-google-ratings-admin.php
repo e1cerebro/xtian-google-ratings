@@ -100,4 +100,50 @@ class Xtian_Google_Ratings_Admin {
 
 	}
 
+	public function xtian_gr_admin_menu(){
+			
+		add_submenu_page( 
+				'options-general.php', 
+				__('Google Ratings', GR_TEXT_DOMAIN), 
+				__('Google Ratings', GR_TEXT_DOMAIN), 
+				'manage_options', 
+				'xtian-google-ratings', 
+				[ $this, 'xtian_gr_settings_page'] );
+	}
+
+	public function xtian_gr_settings_page(){
+
+		include_once( 'partials/xtian-google-ratings-admin-display.php' );
+
+		// $buz_google_api 	= trim('AIzaSyB-XJtNX1nMaAjqywx_q8VDHFQEw3D5alQ');
+		// $companyName 		= urlencode('Scooter Country');
+	
+		// $referenceObj 		= wp_remote_get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='.$companyName.'&sensor=true&key='.$buz_google_api);
+		// $data 				= json_decode($referenceObj['body']);
+		// $referenceID   		= $data->results[0]->reference;
+		// $rating   			= $data->results[0]->rating;
+		
+		// return array($rating, $referenceID );
+		// $ratings 			= $reviewsOBJ->result->rating;
+
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
+	}
+
+	public function xtian_gr_settings_options(){
+		/* ---------------------- GENERAL SECTION ---------------------- */
+			include_once( 'partials/settings-api/xtian-general-settings.php' );
+			$general_settings = new GR_General_Settings($this->plugin_name);
+			$general_settings->register_section();
+			$general_settings->register_fields();
+		/* ---------------------- END GENERAL SECTION ---------------------- */
+		
+		/* ---------------------- DISPLAY SECTION ---------------------- */
+			include_once( 'partials/settings-api/xtian-display-settings.php' );
+			$display_settings = new GR_Display_Settings($this->plugin_name);
+			$display_settings->register_section();
+			$display_settings->register_fields();
+		/* ---------------------- END DISPLAY SECTION ---------------------- */
+	}
 }
