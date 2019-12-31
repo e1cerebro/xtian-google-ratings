@@ -5,8 +5,7 @@ class GR_Display_Settings{
 
     public function __construct( $plugin_name ) {
         $this->plugin_name = $plugin_name;
-        include_once(GR_UTIL_FUNCTIONS);
-        GR_Helpers::update_company();
+       
     }
     
     public function register_section(){

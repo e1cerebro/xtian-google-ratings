@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'XTIAN_GOOGLE_RATINGS_VERSION', '1.0.0' );
 define( 'GR_TEXT_DOMAIN', 'xtian-google-ratings' );
-define( 'LOADING_IMAGE_PATH', plugin_dir_url( __FILE__ ).'includes/img/google-logo.png'  );
+define( 'GR_GOOGLE_IMAGE_PATH', plugin_dir_url( __FILE__ ).'includes/img/google-logo.png'  );
 define( 'GR_UTIL_FUNCTIONS', plugin_dir_path( __FILE__ ).'includes/functions/xtian-custom-functions.php');
 
 /**

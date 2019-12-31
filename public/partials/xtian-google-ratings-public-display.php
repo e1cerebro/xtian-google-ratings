@@ -19,12 +19,12 @@ $gr_rating = (float) $gr_rating;
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-	        <?php if( '1' == esc_attr(get_option('xtain_gr_enable_el')) && ( strlen(esc_attr(get_option('xtain_gr_company_name_key_el'))) > 0 && strlen(esc_attr(get_option('	xtain_gr_google_api_key_el'))) > 0 ) ): ?> 
+	        <?php if(  '1' == esc_attr(get_option('xtain_gr_enable_el')) && $gr_rating > 0  && ( strlen(esc_attr(get_option('xtain_gr_company_name_key_el'))) > 0 && strlen(esc_attr(get_option('	xtain_gr_google_api_key_el'))) > 0 ) ): ?> 
 
 			<!-- Start Mobile -->
 			<div class="gr-mobile-container">
 					<div class="gr-left">
-					<img class="gr-google-logo" src="<?php echo LOADING_IMAGE_PATH; ?>" alt="Google Logo">
+					<img class="gr-google-logo" src="<?php echo GR_GOOGLE_IMAGE_PATH; ?>" alt="Google Logo">
 						<span class="gr_rating"> <?php echo  number_format($gr_rating , 1); ?> </span> <div class="Stars" style="--rating: <?php echo number_format($gr_rating , 1); ?>;" aria-label="Rating of this product is <?php echo number_format($gr_rating , 1); ?> out of 5."></div>
 					</div>
 					<div class="gr-right">
@@ -43,7 +43,7 @@ $gr_rating = (float) $gr_rating;
 				</div>
 				<div class="gr-body">
 					<div class="gr-left">
-						<img class="gr-google-logo" src="<?php echo LOADING_IMAGE_PATH; ?>" alt="Google Logo">
+						<img class="gr-google-logo" src="<?php echo GR_GOOGLE_IMAGE_PATH; ?>" alt="Google Logo">
 					</div>
 					<div class="gr-right">
 

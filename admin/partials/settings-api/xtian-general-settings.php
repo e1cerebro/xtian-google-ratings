@@ -30,12 +30,12 @@ class GR_General_Settings{
         /* Company Name */
         add_settings_field(
             'xtain_gr_company_name_key_el',
-            __( 'Company Name', GR_TEXT_DOMAIN),
+            __( 'Google Business Name', GR_TEXT_DOMAIN),
             [ $this,'xtain_gr_company_name_key_cb'],
             $this->plugin_name,
             'xtain_gr_general_section'
         );
-        register_setting( $this->plugin_name, 'xtain_gr_company_name_key_el', array($this, 'xtian_gr_sanitize_callback'));
+        register_setting( $this->plugin_name, 'xtain_gr_company_name_key_el', array($this, 'xtian_gr_sanitize_company_name_callback'));
     }
     
 	public function xtain_gr_google_api_key_cb(){
@@ -58,6 +58,18 @@ class GR_General_Settings{
     public function xtian_gr_sanitize_callback($input){
 
         return $input;
+    }
+
+    public function xtian_gr_sanitize_company_name_callback($new_company_name){
+
+        $old_company_name = get_option('xtain_gr_company_name_key_el', '');
+
+        if($new_company_name != $old_company_name){
+            include_once(GR_UTIL_FUNCTIONS);
+            GR_Helpers::update_company($new_company_name);
+        }
+
+        return $new_company_name;
 
     }
 }

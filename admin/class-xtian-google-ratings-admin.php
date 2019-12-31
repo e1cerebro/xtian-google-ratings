@@ -113,7 +113,6 @@ class Xtian_Google_Ratings_Admin {
 
 	public function xtian_gr_settings_page(){
 		include_once( 'partials/xtian-google-ratings-admin-display.php' );
-		
 	}
 
 	public function xtian_gr_settings_options(){
@@ -135,6 +134,7 @@ class Xtian_Google_Ratings_Admin {
 			$instance->register_section();
 			$instance->register_fields();
 		}
+
 	}
 
 	// Cron Job
@@ -146,7 +146,8 @@ class Xtian_Google_Ratings_Admin {
 
 	public function xtian_gr_cron_cb(){
 		include_once(GR_UTIL_FUNCTIONS);
-		GR_Helpers::update_company();
+		$gr_company_name = get_option('xtain_gr_company_name_key_el', '');
+		GR_Helpers::update_company($gr_company_name);
 	}
 
 	public function chmg_wapu_custom_cron_schedules($schedules){

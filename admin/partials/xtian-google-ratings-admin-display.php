@@ -21,6 +21,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
+    
     <h1><?php echo get_admin_page_title(); ?></h1>
     <hr/>
 
@@ -44,5 +45,20 @@
                 submit_button(); 
         ?>
     </form>
+
+
+    <?php
+        $gr_rating = esc_attr(trim(get_option('xtian_gr_rating', 0)));
+    ?>
+
+    <?php if(!empty(get_option('xtain_gr_google_api_key_el')) && $gr_rating <= 0): ?>
+        <div class="error notice">
+            <p>Oops! We could not find the ratings for <strong><?php echo get_option('xtain_gr_company_name_key_el', ''); ?> </strong> </p>
+        </div>
+    <?php else: ?>
+        <div class="updated notice">
+            <p>Congratulations! <strong>Current Google Business Rating is <?php echo (float)$gr_rating; ?></strong></p>
+        </div>
+    <?php endif; ?>
 
 </div>
